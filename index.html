@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Command-Line Tutor</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <script type="importmap">
+      {
+        "imports": {
+          "@google/genai": "https://esm.sh/@google/genai@^0.14.2",
+          "marked": "https://esm.sh/marked@^13.0.0",
+          "dompurify": "https://esm.sh/dompurify@^3.1.6"
+        }
+      }
+    </script>
+    <script type="module" src="index.tsx"></script>
+</head>
+<body>
+    <div id="app-container">
+        <nav id="sidebar">
+            <h1>Learn</h1>
+            <ul>
+                <li class="active" data-topic="terminal">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 3h16a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1m1 4v2h4V7H5m-1 8v2h14v-2H4Z"/></svg>
+                    Terminal
+                </li>
+                <li class="disabled" data-topic="powershell">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m2 5.57 6.15 3.55L2 12.67V5.57M9.3 9.47 3.15 5.92L9.3 2.37l6.15 3.55-6.15 3.55m-6.15 7.1 6.15 3.55 6.15-3.55-6.15-3.55-6.15 3.55m13.7-6.75-1.95 1.13L15.65 14l1.95-1.12 1.95-1.13M22 12.67 15.85 9.12 22 5.57v7.1Z"/></svg>
+                    PowerShell
+                </li>
+                <li class="disabled" data-topic="ssh">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 12v4h-1a2 2 0 0 0-2-2h-2V8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v4m-2-2a1 1 0 0 0-1-1h-1v2h1a1 1 0 0 0 1-1M9 6a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4m0 2H5v8h4V8m-2 2.5a.5.5 0 0 0-.5.5v3a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-3a.5.5 0 0 0-.5-.5H7Z"/></svg>
+                    SSH
+                </li>
+                 <li class="disabled" data-topic="sqlite">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-10 10 10 10 0 0 0 10 10 10 10 0 0 0 10-10A10 10 0 0 0 12 2M8 6h3v12H8V6m5 0h3v12h-3v-5H9.33V8H13V6Z"/></svg>
+                    SQLite
+                </li>
+                <li class="disabled" data-topic="networking">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 21a2 2 0 0 1-2-2h4a2 2 0 0 1-2 2m6-3H6a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2h1V9a5 5 0 0 1 5-5a5 5 0 0 1 5 5v4h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2m-2 0v-1a2 2 0 0 1-2-2h-1a2 2 0 0 1-2-2V9a3 3 0 0 0-3-3a3 3 0 0 0-3 3v4a2 2 0 0 1-2 2h-1a2 2 0 0 1-2 2v1h12Z"/></svg>
+                    Networking
+                </li>
+                <li class="disabled" data-topic="hacking">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2m-7-2a5 5 0 1 0 0-10a5 5 0 0 0 0 10m0-2a3 3 0 1 1 0-6a3 3 0 0 1 0 6M6 7h2v2H6V7m3 0h2v2H9V7m3 0h2v2h-2V7Z"/></svg>
+                    Hacking
+                </li>
+            </ul>
+        </nav>
+        <main id="main-content">
+            <div id="left-panels">
+                <section id="tutorial-panel" aria-labelledby="tutorial-heading">
+                    <h2 id="tutorial-heading">Lesson 1: Introduction to the Command Line</h2>
+                    <p>Welcome! This is your emulated terminal. It's a safe space to learn. Use the commands below, the terminal in the center, and see the results in the file system on the right.</p>
+                    <p>Let's start with <code>pwd</code> (print working directory) to see where you are.</p>
+                    <div class="command-bubble-wrapper">
+                      <button class="command-bubble" data-command="pwd">pwd</button>
+                    </div>
+    
+                    <p>Now, use <code>ls</code> (list) to see what's in the current directory.</p>
+                     <div class="command-bubble-wrapper">
+                      <button class="command-bubble" data-command="ls">ls</button>
+                    </div>
+
+                    <div id="goal-tutor">
+                        <h3>What do you want to accomplish?</h3>
+                        <p>Describe what you want to do, and the AI tutor will teach you the commands.</p>
+                        <textarea id="goal-input" placeholder="e.g., create a new folder called 'projects' and then make a text file inside it named 'notes.txt'" aria-label="Goal input"></textarea>
+                        <button id="goal-submit-btn">Teach Me</button>
+                        <div id="goal-output"></div>
+                    </div>
+                </section>
+            </div>
+            <section id="terminal-container" aria-labelledby="terminal-heading">
+                <h2 id="terminal-heading" class="visually-hidden">Terminal Emulator</h2>
+                <div id="terminal">
+                    <div id="terminal-output"></div>
+                    <div id="terminal-input-line">
+                        <span class="prompt">user@gemini:~$</span>
+                        <input type="text" id="terminal-input" autofocus autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" aria-label="Terminal input">
+                    </div>
+                </div>
+            </section>
+            <aside id="filesystem-panel" aria-labelledby="fs-heading">
+                <h2 id="fs-heading">File System</h2>
+                <div id="filesystem-tree"></div>
+            </aside>
+        </main>
+    </div>
+</body>
+</html>

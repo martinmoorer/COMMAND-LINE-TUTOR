@@ -1,0 +1,377 @@
+:root {
+    --bg-color: #1e1e2e;
+    --fg-color: #cdd6f4;
+    --sidebar-bg: #181825;
+    --panel-bg: #1e1e2e;
+    --border-color: #313244;
+    --accent-color: #89b4fa;
+    --accent-hover: #a6c0f8;
+    --text-color: #cdd6f4;
+    --subtext-color: #a6adc8;
+    --disabled-color: #585b70;
+    --error-color: #f38ba8;
+    --highlight-bg: rgba(137, 180, 250, 0.1);
+    --input-bg: #282a36;
+
+
+    --font-sans: 'Roboto', sans-serif;
+    --font-mono: 'Roboto Mono', monospace;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    font-family: var(--font-sans);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-size: 16px;
+    overflow: hidden;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+#app-container {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    grid-template-rows: 1fr;
+    height: 100vh;
+}
+
+/* Sidebar */
+#sidebar {
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+    padding: 1.5rem 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+#sidebar h1 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    padding-left: 0.75rem;
+    color: var(--accent-color);
+}
+
+#sidebar ul {
+    list-style: none;
+}
+
+#sidebar li {
+    display: flex;
+    align-items: center;
+    padding: 0.75rem;
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    font-weight: 500;
+}
+
+#sidebar li svg {
+    width: 20px;
+    height: 20px;
+    margin-right: 1rem;
+    fill: currentColor;
+}
+
+#sidebar li.active {
+    background-color: var(--accent-color);
+    color: var(--sidebar-bg);
+}
+
+#sidebar li:not(.active):not(.disabled):hover {
+    background-color: var(--highlight-bg);
+}
+
+#sidebar li.disabled {
+    color: var(--disabled-color);
+    cursor: not-allowed;
+}
+
+/* Main Content */
+#main-content {
+    display: grid;
+    grid-template-columns: minmax(300px, 1.2fr) 2fr minmax(250px, 1fr);
+    height: 100vh;
+    overflow: hidden;
+}
+
+#left-panels {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    border-right: 1px solid var(--border-color);
+}
+
+/* Tutorial Panel */
+#tutorial-panel {
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+#tutorial-panel h2 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--accent-color);
+}
+
+#tutorial-panel p {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    max-width: 80ch;
+    color: var(--subtext-color);
+}
+
+#tutorial-panel code {
+    background-color: var(--border-color);
+    padding: 0.2em 0.4em;
+    margin: 0;
+    font-size: 85%;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+}
+
+.command-bubble-wrapper {
+    margin: 1.5rem 0;
+}
+
+.command-bubble {
+    background-color: var(--border-color);
+    border: 1px solid var(--border-color);
+    color: var(--accent-color);
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.command-bubble:hover {
+    background-color: var(--accent-color);
+    border-color: var(--accent-hover);
+    color: var(--bg-color);
+}
+
+/* Goal Tutor */
+#goal-tutor {
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 2rem;
+}
+
+#goal-tutor h3 {
+    font-size: 1.25rem;
+    color: var(--accent-color);
+    margin-bottom: 0.5rem;
+}
+
+#goal-tutor textarea {
+    width: 100%;
+    height: 100px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 0.75rem;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    color: var(--fg-color);
+    resize: vertical;
+    margin-bottom: 1rem;
+}
+
+#goal-tutor textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+#goal-tutor button {
+    background-color: var(--accent-color);
+    color: var(--bg-color);
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#goal-tutor button:hover {
+    background-color: var(--accent-hover);
+}
+
+#goal-tutor button:disabled {
+    background-color: var(--disabled-color);
+    cursor: not-allowed;
+}
+
+#goal-output {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background-color: var(--sidebar-bg);
+    border-radius: 6px;
+    line-height: 1.6;
+}
+
+#goal-output code {
+    background-color: var(--bg-color);
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    display: block;
+    white-space: pre-wrap;
+    word-break: break-all;
+    border-radius: 4px;
+    margin: 1rem 0;
+    color: var(--fg-color);
+}
+#goal-output p {
+    margin-bottom: 0.5rem;
+}
+
+/* Terminal */
+#terminal-container {
+    background-color: var(--sidebar-bg);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;
+    border-right: 1px solid var(--border-color);
+}
+
+#terminal {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    color: var(--fg-color);
+}
+
+#terminal-output {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+#terminal-output > div {
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+.log-command {
+    display: flex;
+}
+
+.prompt {
+    color: var(--accent-color);
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+}
+
+.command-text {
+    color: var(--fg-color);
+}
+
+.log-response {
+    color: var(--fg-color);
+}
+
+.log-error {
+    color: var(--error-color);
+}
+
+#terminal-input-line {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+#terminal-input {
+    background: none;
+    border: none;
+    color: var(--fg-color);
+    font-family: var(--font-mono);
+    font-size: inherit;
+    flex-grow: 1;
+    outline: none;
+}
+
+/* Filesystem Panel */
+#filesystem-panel {
+    background-color: var(--sidebar-bg);
+    padding: 1.5rem 1rem;
+    overflow-y: auto;
+}
+
+#filesystem-panel h2 {
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    padding-left: 0.5rem;
+    color: var(--accent-color);
+}
+
+#filesystem-tree ul {
+    list-style: none;
+    padding-left: 1rem;
+}
+
+#filesystem-tree li {
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+}
+
+#filesystem-tree li.active > .name,
+#filesystem-tree li.active > .icon {
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+#filesystem-tree li .icon {
+    margin-right: 0.5rem;
+}
+
+#filesystem-tree li.directory > ul {
+    border-left: 1px solid var(--border-color);
+    margin-left: 0.5rem;
+}
+
+/* Error Message */
+.error-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+    padding: 2rem;
+}
+
+.error-container h1 {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+    color: var(--error-color);
+}
+
+.error-container p {
+    font-size: 1.1rem;
+    color: var(--subtext-color);
+    max-width: 500px;
+}
